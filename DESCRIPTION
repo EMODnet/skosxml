@@ -1,0 +1,14 @@
+Package: skossxml
+Title: read and parse skossxml
+Version: 0.0.0.9000
+Authors@R: person("Daphnis", "De Pooter", email = "daphnisd@vliz.be", role = c("aut", "cre"))
+Description: Reads and parses skoss xml data like those provided by the BODC rest services
+Depends: R (>= 3.4.3)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+  dplyr,
+  xml2,
+  stringr
+RoxygenNote: 6.1.1
