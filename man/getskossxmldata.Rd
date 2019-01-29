@@ -4,10 +4,12 @@
 \alias{getskossxmldata}
 \title{get skos xml data}
 \usage{
-getskossxmldata(vocids)
+getskossxmldata(vocids = NA, vocabs = NA)
 }
 \arguments{
 \item{vocids}{mandatory parameter, the XML link(s)  you want to read the read}
+
+\item{vocabs}{optional parameter, include which vocabs you want to include. Takes multiple vocabs if separated by a "|" (eg. "P01|P06|Q01")}
 }
 \description{
 This function allows to get the information form different concepts stored in skoss xml. It takes a single concept, multiple concepts or a shema. The output is a list of 2 data frames; one with the lables and definitions. The other with the relations with other concepts.
@@ -15,6 +17,6 @@ This function allows to get the information form different concepts stored in sk
 \examples{
 getskossxmldata("http://vocab.nerc.ac.uk/collection/P06/current/UMCU/")
 getskossxmldata(c("http://vocab.nerc.ac.uk/collection/P06/current/UMCU/","http://vocab.nerc.ac.uk/collection/P06/current/ULAA/")
-getskossxmldata("http://vocab.nerc.ac.uk/collection/S10/current/")
+getskossxmldata("http://vocab.nerc.ac.uk/collection/S10/current/", vocabs ="S10|S11")
 getskossxmldata("http://dd.eionet.europa.eu/vocabulary/biodiversity/eunishabitats/rdf")
 }

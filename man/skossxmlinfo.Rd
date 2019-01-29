@@ -4,7 +4,7 @@
 \alias{skossxmlinfo}
 \title{parse skoss xml file}
 \usage{
-skossxmlinfo(skossxml)
+skossxmlinfo(skossxml = NA)
 }
 \arguments{
 \item{skossxml}{mandatory parameter, the output from readskossxml}
