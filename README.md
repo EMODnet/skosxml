@@ -1,14 +1,14 @@
-# skossxml
-reads and parses skoss xml and rdf files
+# skosxml
+reads and parses skos xml and rdf files
 
 
 ## Installation
 
-Installing `skossxml` requires the `devtools` package:
+Installing `skosxml` requires the `devtools` package:
 
 ```R
 install.packages("devtools")
-devtools::install_github("Daphnisd/skossxml") 
+devtools::install_github("EMODnet/skosxml") 
 ```
 
 
