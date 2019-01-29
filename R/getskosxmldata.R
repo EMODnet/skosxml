@@ -24,9 +24,9 @@ getskossxmldata <- function (vocids = NA, vocabs = NA) {
   }  
   
   for (i in vocids) {
-    skossxml  <- readskossxml(i)
-    terminfo <- skossxmlinfo(skossxml)
-    termrelation <- skossxmlrelations(skossxml)
+    skossxml  <- suppressWarnings(readskossxml(i))
+    terminfo <- suppressWarnings(skossxmlinfo(skossxml))
+    termrelation <- suppressWarnings(skossxmlrelations(skossxml))
     
     if (exists("terminfos")) {terminfos <- bind_rows(terminfos, terminfo)} else {  terminfos <- terminfo}
     if (exists("termrelations")) {termrelations <- bind_rows(termrelations, termrelation)} else {  termrelations <- termrelation}
@@ -68,9 +68,9 @@ getskossxmldatainfo <- function (vocids = NA, vocabs = NA) {
                                        !grepl(glob2rx("*current") , vocids))))
   }  
  
-  terminfo<- lapply(vocids, function(x) {
+  terminfo<- suppressWarnings(lapply(vocids, function(x) {
   skossxmlinfo(readskossxml(x))
-  } ) 
+  } )) 
   terminfos <- bind_rows(terminfo)                  
                     
  
@@ -140,7 +140,7 @@ skossxmlrelations <- function (skossxml) {
   if(!is.null(skossxml)) {if(!is.na(skossxml)){
   
     
-    termr2 <- lapply(skossxml, function(y) {
+    termr2 <- suppressWarnings(lapply(skossxml, function(y) {
     termr <-  lapply(skossconcepts, function(j) {
         
         options(stringsAsFactors = FALSE)
@@ -153,7 +153,7 @@ skossxmlrelations <- function (skossxml) {
           }
         })
       termr2 <-  bind_rows(termr)  
-    })
+    }))
     
     termrelations <- bind_rows(termr2)
 
