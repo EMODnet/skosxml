@@ -1,5 +1,5 @@
-Package: skossxml
-Title: read and parse skossxml
+Package: skosxml
+Title: read and parse skosxml
 Version: 0.0.0.9000
 Authors@R: person("Daphnis", "De Pooter", email = "daphnisd@vliz.be", role = c("aut", "cre"))
 Description: Reads and parses skoss xml data like those provided by the BODC rest services
