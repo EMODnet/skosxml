@@ -144,10 +144,10 @@ skossxmlrelations <- function (skossxml) {
     termr <-  lapply(skossconcepts, function(j) {
         
         options(stringsAsFactors = FALSE)
-        templ <- xml2::xml_find_all(skossxml,paste0(".//",j))
-        tempid <- xml2::xml_attr(skossxml, "about")
+        templ <- xml2::xml_find_all(y,paste0(".//",j))
+        tempid <- xml2::xml_attr(y, "about")
         
-        if(length(templ)>0){
+        if(length(templ)>0  ){
           temp <- dplyr::bind_rows(lapply(xml2::xml_attrs(templ), function(x) data.frame(as.list(x), stringsAsFactors=FALSE)))
           temp <- cbind(term = tempid ,temp,relation =richtfrom(j,":",0))
           }
