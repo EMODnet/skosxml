@@ -54,7 +54,11 @@ getunitsandparams <- function(vocids=NA, vocabs = NA) {
   }  
   
   
-      df<- getskossxmldata(vocids)
+      #df<- getskossxmldata(vocids) 
+      if(length(vocids) >  0) {
+        df<- getskossxmldata(paste0(vocids, "?_mediatype=application/rdf+xml")) # To address new structure of BODC web services
+      
+  
       if(length(df) >  0) {
       
       para <- df$terminfo %>% select (preflabel , altlabel, definition, deprecated, uri)
@@ -67,5 +71,6 @@ getunitsandparams <- function(vocids=NA, vocabs = NA) {
       return (parawithhunit) 
   
   }
+      }
   }
 
