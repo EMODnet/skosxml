@@ -56,7 +56,7 @@ getunitsandparams <- function(vocids=NA, vocabs = NA) {
   
       #df<- getskossxmldata(vocids) 
       if(length(vocids) >  0) {
-        df<- getskossxmldata(paste0(vocids, "?_mediatype=application/rdf+xml")) # To address new structure of BODC web services
+        df<- getskossxmldata(vocids) 
       
   
       if(length(df) >  0) {

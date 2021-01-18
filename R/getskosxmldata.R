@@ -91,16 +91,18 @@ getskossxmldatainfo <- function (vocids = NA, vocabs = NA) {
 
 
 readskossxml <- function(X) {
- tryCatch({
-  x <- suppressWarnings(xml2::read_xml(X))
-  skossxml <- suppressWarnings(xml2::xml_find_all(x, ".//skos:Concept")) }
-  , error = function(x){
-  print(paste0(X," does not resolve to a concept"))
-  })
-if (exists("skossxml")){
-return(skossxml)
-} 
-}
+  tryCatch(
+    {
+        x <- suppressWarnings(xml2::read_xml(paste0(X, "?_mediatype=application/rdf+xml"))) # To address new structure of BODC web services
+        skossxml <- suppressWarnings(xml2::xml_find_all(x, ".//skos:Concept")) 
+     },
+      error = function(x){
+        print(paste0(X," does not resolve to a concept"))
+      }
+    )
+    if (exists("skossxml")){
+      return(skossxml)
+}}
 
 #' parse skoss xml file
 #'
