@@ -93,7 +93,7 @@ getskossxmldatainfo <- function (vocids = NA, vocabs = NA) {
 readskossxml <- function(X) {
   tryCatch(
     {
-        x <- suppressWarnings(xml2::read_xml(paste0(X, "?_mediatype=application/rdf+xml"))) # To address new structure of BODC web services
+        x <- suppressWarnings(xml2::read_xml(paste0(X, "?_profile=nvs&_mediatype=application/rdf+xml"))) # To address new structure of BODC web services
         skossxml <- suppressWarnings(xml2::xml_find_all(x, ".//skos:Concept")) 
      },
       error = function(x){
