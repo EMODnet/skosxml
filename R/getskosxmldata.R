@@ -100,9 +100,11 @@ readskossxml <- function(X) {
         print(paste0(X," does not resolve to a concept"))
       }
     )
-    if (exists("skossxml")){
+    if (exists("skossxml") & length(skossxml) > 0){
       return(skossxml)
-}}
+    } else {
+      print(paste0(X," does not resolve to a concept"))}
+  }
 
 #' parse skoss xml file
 #'
@@ -113,7 +115,7 @@ readskossxml <- function(X) {
 
 
 skossxmlinfo <- function (skossxml = NA) {
-  if(!is.null(skossxml)) {if(!is.na(skossxml)){
+  if(!is.null(skossxml)) {if(!is.na(skossxml) & !grepl("does not resolve to a concept", skossxml) ){
     
   l <- lapply(skossxml, function(term) {
     element <- xml2::as_list(term)
@@ -139,7 +141,7 @@ skossxmlinfo <- function (skossxml = NA) {
 
 
 skossxmlrelations <- function (skossxml) {
-  if(!is.null(skossxml)) {if(!is.na(skossxml)){
+  if(!is.null(skossxml)) {if(!is.na(skossxml) & !grepl("does not resolve to a concept", skossxml)){
   
     
     termr2 <- suppressWarnings(lapply(skossxml, function(y) {

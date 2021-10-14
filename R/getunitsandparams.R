@@ -76,7 +76,8 @@ getunitsandparams <- function(vocids=NA, vocabs = NA) {
       } else {parawithhunit <-  para}
       return (parawithhunit) 
   
-  }
+      } else {noconcept <- list()}
+        return(noconcept)
       }
   }
 
