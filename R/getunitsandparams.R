@@ -60,12 +60,12 @@ getunitsandparams <- function(vocids=NA, vocabs = NA) {
       
   
       if(length(df) > 0 & 
-         if("termrelations" %in% names(df)) {
-           length(df$termrelations) > 0
-         } &
-         if("terminfos" %in% names(df)) {
+        # if("termrelations" %in% names(df)) {
+           length(df$termrelations) > 0 & #} 
+         #if("terminfos" %in% names(df)) {
            length(df$terminfos) > 0
-         }) {
+  #}
+         ) {
       
       para <- df$terminfo %>% select (preflabel , altlabel, definition, deprecated, uri)
       paraandunit <- df$termrelation %>% filter (relation == "related" & grepl("P06", resource)) %>% rename(standardUnitID =resource)
@@ -76,8 +76,8 @@ getunitsandparams <- function(vocids=NA, vocabs = NA) {
       } else {parawithhunit <-  para}
       return (parawithhunit) 
   
-      } else {noconcept <- list()}
-        return(noconcept)
+      } else {noconcept <- list()
+      return(noconcept)}
       }
   }
 
