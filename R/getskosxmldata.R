@@ -100,10 +100,12 @@ readskossxml <- function(X) {
         print(paste0(X," does not resolve to a concept"))
       }
     )
-    if (exists("skossxml") & length(skossxml) > 0){
-      return(skossxml)
-    } else {
-      print(paste0(X," does not resolve to a concept"))}
+  
+    if (exists("skossxml")) {
+      if (length(skossxml) > 0) {
+          return(skossxml)
+      } else {print(paste0(X," does not resolve to a concept"))}
+    } else {print(paste0(X," does not resolve to a concept"))}
   }
 
 #' parse skoss xml file
