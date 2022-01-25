@@ -18,7 +18,7 @@ getskossxmldata <- function (vocids = NA, vocabs = NA) {
   
   if(!is.na(vocabs)) {
     vocids <- unique(subset (vocids,(grepl (vocabs, vocids)) & 
-                               (grepl ("http://vocab.nerc.ac.uk/collection", vocids) &
+                               (grepl ("vocab.nerc.ac.uk/collection", vocids) &
                                   !grepl(glob2rx("*current?") , vocids) & 
                                   !grepl(glob2rx("*current") , vocids))))
   }  
@@ -93,8 +93,16 @@ getskossxmldatainfo <- function (vocids = NA, vocabs = NA) {
 readskossxml <- function(X) {
   tryCatch(
     {
-        x <- suppressWarnings(xml2::read_xml(paste0(X, "?_profile=nvs&_mediatype=application/rdf+xml"))) # To address new structure of BODC web services
-        skossxml <- suppressWarnings(xml2::xml_find_all(x, ".//rdf:Description")) 
+      if (grepl("vocab.nerc.ac.uk/collection", X)) {
+            x <- suppressWarnings(xml2::read_xml(paste0(X, "?_profile=nvs&_mediatype=application/rdf+xml"))) # To address new structure of BODC web services
+            skossxml <- suppressWarnings(xml2::xml_find_all(x, ".//rdf:Description"))
+        }
+        
+      if(grepl("dd.eionet.europa.eu/vocabulary/biodiversity", X)) {     
+            x <- suppressWarnings(xml2::read_xml(X)) # To address new structure of BODC web services
+            skossxml <- suppressWarnings(xml2::xml_find_all(x, ".//skos:Concept"))
+        }
+        
      },
       error = function(x){
         print(paste0(X," does not resolve to a concept"))
