@@ -67,7 +67,7 @@ getunitsandparams <- function(vocids=NA, vocabs = NA) {
   #}
          ) {
       
-      para <- df$terminfo %>% select (preflabel , altlabel, definition, deprecated, uri)
+      para <- df$terminfo %>% select (preflabel , altlabel, definition, deprecated, uri, identifier)
       paraandunit <- df$termrelation %>% filter (relation == "related" & grepl("P06", resource)) %>% rename(standardUnitID =resource)
       unit <- getskossxmldatainfo(unique(paraandunit$standardUnitID)) %>% select(standardUnitID = uri, unitpref = preflabel, standardunit = altlabel )
     
