@@ -25,7 +25,7 @@ relatedterms <- (getskossxmldata(vocid)$termrelation %>% filter (relation == rel
 } else {
 relatedterms <- (getskossxmldata(vocid)$termrelation)$resource
 }}}
-}, error = function(x) {print(past0(vocid ," does not resolve"))}) 
+}, error = function(x) {print(paste0(vocid ," does not resolve"))}) 
 if(exists("relatedterms")){return(relatedterms)  }
 }
 

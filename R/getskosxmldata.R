@@ -23,14 +23,40 @@ getskossxmldata <- function (vocids = NA, vocabs = NA) {
                                   !grepl(glob2rx("*current") , vocids))))
   }  
   
+  
+  
+  if (vocids == "http://dd.eionet.europa.eu/vocabulary/biodiversity/eunishabitats/rdf") {
+  
+  for (i in vocids) {
+    skossxml  <- suppressWarnings(readskossxml(i))
+    terminfo <- suppressWarnings(skossxmlinfo(skossxml))
+    
+    termrelation <- tryCatch({suppressWarnings(skossxmlrelations(skossxml))
+                              }, error = function(x) {
+                                print(paste0(vocids ," does not resolve"))
+                                return (NA)
+                              })
+    
+    if (exists("terminfos")) {terminfos <- bind_rows(terminfos, terminfo)} else {  terminfos <- terminfo}
+    if (exists("termrelations")) {
+       
+        termrelations <- bind_rows(if(!is.na(termrelations) | !is.null(termrelations)) {termrelations}, 
+                                   if(!is.na(termrelation) | !is.null(termrelation)) {termrelation}) 
+    } else {  termrelations <- termrelation}
+  }
+  
+  } else{
+  
+  
   for (i in vocids) {
     skossxml  <- suppressWarnings(readskossxml(i))
     terminfo <- suppressWarnings(skossxmlinfo(skossxml))
     termrelation <- suppressWarnings(skossxmlrelations(skossxml))
+
     
     if (exists("terminfos")) {terminfos <- bind_rows(terminfos, terminfo)} else {  terminfos <- terminfo}
     if (exists("termrelations")) {termrelations <- bind_rows(termrelations, termrelation)} else {  termrelations <- termrelation}
-  }
+  }}
   
   skossxmldata <-list()
   skossxmldata$termrelations <- termrelations
